@@ -1,0 +1,56 @@
+O* 5T OTA Simulation
+* IIT Kanpur - Analog Fault Detection Project
+* VDD=1.8V, ID=100uA, GBW~50MHz
+
+.include "tsmc180nm.lib"
+
+* =====================
+* Supply and Bias
+* =====================
+VDD   vdd   0     DC 1.8
+Vbias vbias 0     DC 0.7
+Vinp  inp   0     DC 0.9 AC 0.5
+Vinn  inn   0     DC 0.9 AC -0.5
+
+* Load capacitor
+CL vout 0 1p
+
+* =====================
+* 5T OTA Transistors
+* =====================
+* Format: Mname Drain Gate Source Bulk Model W L
+
+* Differential pair (NMOS)
+M1 vout  inp   vtail 0   NMOS W=10u L=0.18u
+M2 vmid  inn   vtail 0   NMOS W=10u L=0.18u
+
+* Current mirror load (PMOS)
+M3 vmid  vmid  vdd   vdd PMOS W=28u L=0.18u
+M4 vout  vmid  vdd   vdd PMOS W=28u L=0.18u
+
+* Tail current source (NMOS)
+M5 vtail vbias 0     0   NMOS W=20u L=0.18u
+
+* =====================
+* Analysis Commands
+* =====================
+.op
+.ac dec 100 1 10G
+.tran 1n 500n
+
+* Save nodes
+.save v(vout) v(inp) v(inn) v(vtail) v(vmid)
+
+* Measurements
+.measure ac GBW    when vdb(vout)=0
+.measure ac PM     find vp(vout)  when vdb(vout)=0
+.measure ac DCgain find db(vout) at=1
+
+.control
+run
+
+setplot ac1
+
+plot db(vout)
+
+.endc

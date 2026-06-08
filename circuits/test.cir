@@ -1,0 +1,6 @@
+* Simple test circuit
+VDD vdd 0 DC 1.8
+R1 vdd mid 10k
+R2 mid 0 10k
+.op
+.end

@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+tmp_*.cir
+*.log
+models/*.pkl
+models/*.pth

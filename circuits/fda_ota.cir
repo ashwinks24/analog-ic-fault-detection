@@ -1,0 +1,80 @@
+* Stable Fully Differential OTA - Multi-Cycle Transient Verification
+
+.include "tsmc180nm.lib"
+
+*===================================================================
+* Supplies & Biasing
+*===================================================================
+VDD      vdd       0     DC 1.8
+Vbias    vbias     0     DC 0.62
+Vbias_p  vbias_p   0     DC 1.25
+Vref     vref      0     DC 0.9
+
+* Differential Input (1 kHz Sinusoid)
+Vinp     inp       0     DC 0.9 AC 0.5  SIN(0.9 5m 1k)
+Vinn     inn       0     DC 0.9 AC -0.5 SIN(0.9 -5m 1k)
+
+*===================================================================
+* Output Loads
+*===================================================================
+CLp      voutp     0     1p
+CLn      voutn     0     1p
+
+*===================================================================
+* FDA OTA Core
+*===================================================================
+M1       voutn     inp   vtail     0     NMOS W=10u L=0.18u
+M2       voutp     inn   vtail     0     NMOS W=10u L=0.18u
+
+M3       voutn     vbias_p vdd     vdd   PMOS W=28u L=0.18u
+M4       voutp     vbias_p vdd     vdd   PMOS W=28u L=0.18u
+
+M5       vtail     vcmfb_out 0     0     NMOS W=40u L=0.18u
+
+*===================================================================
+* Common Mode Feedback (CMFB) Network
+*===================================================================
+Rcm1     voutp     vcm_sense 100k
+Rcm2     voutn     vcm_sense 100k
+
+M6       vcmfb_n   vcm_sense vcm_tail 0  NMOS W=10u L=0.18u
+M7       vcmfb_out vref      vcm_tail 0  NMOS W=10u L=0.18u
+
+M8       vcmfb_n   vcmfb_n   vdd     vdd   PMOS W=28u L=0.18u
+M9       vcmfb_out vcmfb_n   vdd     vdd   PMOS W=28u L=0.18u
+
+M10      vcm_tail  vbias     0       0     NMOS W=40u L=0.18u
+
+* Lead-Lag RC Network Stability
+Rz       vcmfb_out vcm_comp  2.5k
+Ccmfb    vcm_comp  0         8p
+
+*===================================================================
+* Simulation Settings & Convergence Helpers
+*===================================================================
+.nodeset v(voutp)=0.9
+.nodeset v(voutn)=0.9
+.nodeset v(vcm_sense)=0.9
+
+.options reltol=0.01
+.options abstol=1e-9
+.options vntol=1e-6
+
+*===================================================================
+* Analyses
+*===================================================================
+.op
+.ac dec 100 1 10G
+* Run for 3ms, step size 1us, save data after 1ms
+.tran 1u 3m 1m
+
+*===================================================================
+* Data Output Setup
+*===================================================================
+.save v(voutp) v(voutn) v(vcm_sense) v(vcmfb_out) v(vtail) v(vcm_tail)
+
+.control
+run
+.endc
+
+.end
