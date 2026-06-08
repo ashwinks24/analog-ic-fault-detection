@@ -232,6 +232,12 @@ elif page == "📊 Model Comparison Matrix":
     st.title("📊 Model Benchmarks")
     st.markdown("Comparative results across all tested architectures using stratified validation sets.")
     st.markdown("---")
+    st.info("""
+    📊 **Note on Accuracy:** Peak accuracy reaches 100% 
+    (Random Forest on 90-sample test set). XGBoost at 
+    99.17% is selected as production model — better 
+    generalization across validation splits.
+    """)
 
     # This mirrors your Jupyter Notebook Summary Ranking exactly
     model_results = {
