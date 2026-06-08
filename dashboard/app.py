@@ -16,7 +16,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # - File Directories -
-BASE_DIR   = Path.home() / "analog_fault_detection"
+BASE_DIR   = BASE_DIR = Path(__file__).parent.parent
 MODELS_DIR = BASE_DIR / "models"
 DATA_DIR   = BASE_DIR / "data"
 
