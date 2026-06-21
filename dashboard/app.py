@@ -92,7 +92,7 @@ if page == "🏠 Project Overview":
         - Models a fully differential operational transconductance amplifier (FDA OTA) in a **180nm CMOS process**.
         - Simulates the layout under **6 specific target configurations** (including aspect ratio mismatches, thermal variance, and voltage supply rails).
         - Tracks a rich **23-dimensional feature space** derived directly from raw transient voltage outputs.
-        - Isolates and maps anomalies instantly with up to **100.00% accuracy** using optimized classification models.
+        - Isolates and maps anomalies instantly with up to **99.83% accuracy** using optimized classification models.
         """)
 
     with col2:
