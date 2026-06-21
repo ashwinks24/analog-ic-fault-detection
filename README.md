@@ -36,17 +36,21 @@ Analog IC faults are hard to detect manually. This project builds an end-to-end 
 
 ---
 
-## ML Results
+## ML Results (3000 Simulations)
 | Model | Accuracy |
 |-------|----------|
-| Random Forest | 100.00% |
 | XGBoost | 99.83% ⭐ |
-| MLP PyTorch | 98.89% |
-| Decision Tree | 98.33% |
-| SVM RBF | 97.50% |
-| Naive Bayes | 95.00% |
+| Random Forest | 99.67% |
+| KNN k=5 | 99.00% |
+| SVM RBF | 97.83% |
+| Logistic Regression | 97.67% |
+| Decision Tree | 94.83% |
+| Naive Bayes | 93.17% |
+| MLP PyTorch | 84.44% |
 
-Production model: XGBoost 99.17% — better generalization across validation splits than Random Forest.
+Production model: XGBoost 99.83% — better generalization across validation splits than Random Forest.
+
+MLP scored lowest (84.44%) confirming tree ensembles are optimal for tabular circuit feature space.
 
 ---
 
