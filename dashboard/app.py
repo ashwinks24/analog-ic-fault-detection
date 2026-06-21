@@ -260,7 +260,6 @@ elif page == "📊 Model Comparison Matrix":
             'Single Node Partitioning', 
             'Kernelized Vector Projections', 
             'Feature Independence Classifier',
-            'Feedforward Neural Network',
             'Feedforward Neural Network'
         ]
     }
