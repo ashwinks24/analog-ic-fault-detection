@@ -78,7 +78,7 @@ if page == "🏠 Project Overview":
     col1.metric("Circuit Architecture", "FDA OTA")
     col2.metric("Dataset Rows", f"{len(df)}")
     col3.metric("Target Profiles", f"{len(le.classes_)}")
-    col4.metric("Peak Test Accuracy", "100.00%")
+    col4.metric("Peak Test Accuracy", "99.83%")
 
     st.markdown("---")
     col1, col2 = st.columns(2)
@@ -138,7 +138,7 @@ elif page == "🔍 Live Testing Engine":
 
     model_choice = st.selectbox(
         "Select Active Classification Model",
-        ["Logistic Regression (100.00%)", "KNN (k=5) (100.00%)", "Random Forest (100.00%)", "XGBoost (99.17%)"]
+        ["XGBoost (99.83%)", "Random Forest (99.67%)", "KNN k=5 (99.00%)", "SVM RBF (97.83%)"]
     )
 
     st.markdown("---")
@@ -235,7 +235,7 @@ elif page == "📊 Model Comparison Matrix":
     st.info("""
     📊 **Note on Accuracy:** Peak accuracy reaches 100% 
     (Random Forest on 90-sample test set). XGBoost at 
-    99.17% is selected as production model — better 
+    99.83% is selected as production model — better 
     generalization across validation splits.
     """)
 
@@ -248,9 +248,10 @@ elif page == "📊 Model Comparison Matrix":
             'XGBoost', 
             'Decision Tree', 
             'SVM (RBF)', 
-            'Naive Bayes Baseline'
+            'Naive Bayes Baseline',
+	    'MLP(PyTorch)'
         ],
-        'Test Accuracy (%)': [100.00, 100.00, 100.00, 99.17, 98.33, 97.50, 95.00],
+        'Test Accuracy (%)': [97.67, 99.00, 99.67, 99.83, 94.83, 97.83, 93.17,84.44],
         'Model Family': [
             'Linear Decision Boundary', 
             'Instance-Based Proximity Model', 
@@ -258,7 +259,9 @@ elif page == "📊 Model Comparison Matrix":
             'Gradient Boosted Decision Trees', 
             'Single Node Partitioning', 
             'Kernelized Vector Projections', 
-            'Feature Independence Classifier'
+            'Feature Independence Classifier',
+            'Feedforward Neural Network',
+            'Feedforward Neural Network'
         ]
     }
     results_df = pd.DataFrame(model_results)

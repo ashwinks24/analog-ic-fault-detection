@@ -4,3 +4,5 @@ __pycache__/
 tmp_*.cir
 *.log
 
+venv/
+data/dataset_backup_600.csv

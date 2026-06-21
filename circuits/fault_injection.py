@@ -14,7 +14,7 @@ CIRCUIT_DIR = BASE_DIR / "circuits"
 DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-RUNS_PER_FAULT = 100
+RUNS_PER_FAULT = 500
 HOME_DIR = str(Path.home())
 
 # - Base Netlist Template 
@@ -61,7 +61,7 @@ Ccmfb vcm_comp 0 8p
 #  Fault Injector Configuration 
 def get_fault_circuit(fault_id):
     # Apply standard 5% process variation across runs
-    p_var = 1 + np.random.normal(0, 0.05)
+    p_var = 1 + np.random.normal(0, 0.08)
     
     base_ota = """
 M1 voutn inp vtail 0 NMOS W={w1}u L=0.18u
