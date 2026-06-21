@@ -40,7 +40,7 @@ Analog IC faults are hard to detect manually. This project builds an end-to-end 
 | Model | Accuracy |
 |-------|----------|
 | Random Forest | 100.00% |
-| XGBoost | 99.17% |
+| XGBoost | 99.83% ⭐ |
 | MLP PyTorch | 98.89% |
 | Decision Tree | 98.33% |
 | SVM RBF | 97.50% |
